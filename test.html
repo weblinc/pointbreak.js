@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pointbreak.js</title>
+        <script type="text/javascript" src="pointbreak.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Set up site break points
+            PointBreak.set("xsmall" , "(max-width: 319px)");
+            PointBreak.set("small"  , "(min-width: 320px) and (max-width: 479px)");
+            PointBreak.set("medium" , "(min-width: 480px) and (max-width: 767px)");
+            PointBreak.set("large"  , "(min-width: 768px) and (max-width: 1023px)");
+            PointBreak.set("xlarge" , "(min-width: 1024px)");
+
+            // Get a previously specified media query and add listeners
+            PointBreak
+                .get("small")
+                    .now('match', function(point) {
+                        // Called immediately if match is true
+                        console.log('now match', point);
+                    })
+                    .now('unmatch', function(point) {
+                        // Called immediately if match is false
+                        console.log('now unmatch', point);
+                    })
+                    .once('match', function(point) {
+                        // Called once if match is true
+                        console.log('once match', point);
+                    })
+                    .once('unmatch', function(point) {
+                        // Called once if match is false
+                        console.log('once unmatch', point);
+                    })
+                    .on('match', function(point) {
+                        // Called each time match is true
+                        console.log('match', point);
+                    })
+                    .on('unmatch', function(point) {
+                        // Called each time match is false
+                        console.log('unmatch', point);
+                    });
+            PointBreak
+                .get("xsmall")
+                    .now('match', function(point) {
+                        // Called immediately if match is true
+                        console.log('now match', point);
+                    })
+                    .now('unmatch', function(point) {
+                        // Called immediately if match is false
+                        console.log('now unmatch', point);
+                    })
+                    .once('match', function(point) {
+                        // Called once if match is true
+                        console.log('once match', point);
+                    })
+                    .once('unmatch', function(point) {
+                        // Called once if match is false
+                        console.log('once unmatch', point);
+                    })
+                    .on('match', function(point) {
+                        // Called each time match is true
+                        console.log('match', point);
+                    })
+                    .on('unmatch', function(point) {
+                        // Called each time match is false
+                        console.log('unmatch', point);
+                    });
+        </script>
+    </body>
+</html>
