@@ -28,8 +28,10 @@
                 var listenerType = this.listeners[type];
 
                 for (var i = 0, len = listenerType.length; i < len; i++) {
-                    if (typeof(listenerType[i]) === 'function') {
-                        listenerType[i].call(win, this);
+                    var listener = listenerType[i];
+
+                    if (typeof(listener.callback) === 'function') {
+                        listener.callback.call(win, this, listener.data);
                     }
                 }
             },
@@ -37,33 +39,39 @@
             handleListener: null,
 
             // Fires 'callback' that matches the 'type' immediately
-            now   : function(type, callback) {
+            now   : function(type, callback, data) {
                 var matches = this.mql && this.mql.matches;
 
                 if ((type === EVENT_TYPE_MATCH && matches) || (type === EVENT_TYPE_UNMATCH && !matches)) {
-                    callback.call(win, this);
+                    callback.call(win, this, data || {});
                 }
 
                 return this;
             },
 
             // Fired the first time the conditions are matched or unmatched
-            once  : function(type, callback) {
+            once  : function(type, callback, data) {
                 var matches = this.mql && this.mql.matches;
 
                 if ((type === EVENT_TYPE_MATCH && matches) || (type === EVENT_TYPE_UNMATCH && !matches)) {
                     this.once[type] = null;
-                    callback.call(win, this);
+                    callback.call(win, this, data || {});
                 } else {
-                    this.once[type] = callback;
+                    this.once[type] = {
+                        callback    : callback,
+                        data        : data
+                    };
                 }
 
                 return this;
             },
 
             // Fired each time the conditions are matched or unmatched which could be multiple times during a session
-            on    : function(type, callback) {
-                this.listeners[type].push(callback);
+            on    : function(type, callback, data) {
+                this.listeners[type].push({
+                    callback    : callback,
+                    data        : data || {}
+                });
 
                 return this;
             },
@@ -124,7 +132,7 @@
             };
 
             // Set up matchMedia and listener, requires matchMedia support or equivalent polyfill to evaluate media query
-            // See https://github.com/weblinc/media-match for matchMedia polyfill
+            // See https://github.com/weblinc/media-match or https://github.com/paulirish/matchMedia.js for matchMedia polyfill
             point.media = value || 'all';
             point.mql   = (win.matchMedia && win.matchMedia(point.media)) || {
                 matches         : false,
@@ -151,12 +159,12 @@
         lastMatch: function(nameList) {
             var list    = nameList.indexOf(' ') ? nameList.split(' ') : [nameList],
                 name    = '',
-                resutlt = '';
+                result = '';
 
             for (var i = 0, len = list.length; i < len; i++) {
                 name = list[i];
                 if (this.points[name] && this.points[name].mql.matches) {
-                    resutlt = name;
+                    result = name;
                 }
             }
 

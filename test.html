@@ -16,56 +16,56 @@
             // Get a previously specified media query and add listeners
             PointBreak
                 .get("small")
-                    .now('match', function(point) {
+                    .now('match', function(point, data) {
                         // Called immediately if match is true
-                        console.log('now match', point);
-                    })
-                    .now('unmatch', function(point) {
+                        console.log('now match', point, data);
+                    }, { testdata: 'now match' })
+                    .now('unmatch', function(point, data) {
                         // Called immediately if match is false
-                        console.log('now unmatch', point);
-                    })
-                    .once('match', function(point) {
+                        console.log('now unmatch', point, data);
+                    }, { testdata: 'now unmatch' })
+                    .once('match', function(point, data) {
                         // Called once if match is true
-                        console.log('once match', point);
-                    })
-                    .once('unmatch', function(point) {
+                        console.log('once match', point, data);
+                    }, { testdata: 'once match' })
+                    .once('unmatch', function(point, data) {
                         // Called once if match is false
-                        console.log('once unmatch', point);
-                    })
-                    .on('match', function(point) {
+                        console.log('once unmatch', point, data);
+                    }, { testdata: 'once umatch' })
+                    .on('match', function(point, data) {
                         // Called each time match is true
-                        console.log('match', point);
-                    })
-                    .on('unmatch', function(point) {
+                        console.log('match', point, data);
+                    }, { testdata: 'match' })
+                    .on('unmatch', function(point, data) {
                         // Called each time match is false
-                        console.log('unmatch', point);
-                    });
+                        console.log('unmatch', point, data);
+                    }, { testdata: 'unmatch' });
             PointBreak
                 .get("xsmall")
-                    .now('match', function(point) {
+                    .now('match', function(point, data) {
                         // Called immediately if match is true
-                        console.log('now match', point);
-                    })
-                    .now('unmatch', function(point) {
+                        console.log('now match', point, data);
+                    }, { testdata: 'now match' })
+                    .now('unmatch', function(point, data) {
                         // Called immediately if match is false
-                        console.log('now unmatch', point);
-                    })
-                    .once('match', function(point) {
+                        console.log('now unmatch', point, data);
+                    }, { testdata: 'now unmatch' })
+                    .once('match', function(point, data) {
                         // Called once if match is true
-                        console.log('once match', point);
-                    })
-                    .once('unmatch', function(point) {
+                        console.log('once match', point, data);
+                    }, { testdata: 'once match' })
+                    .once('unmatch', function(point, data) {
                         // Called once if match is false
-                        console.log('once unmatch', point);
-                    })
-                    .on('match', function(point) {
+                        console.log('once unmatch', point, data);
+                    }, { testdata: 'once unmatch' })
+                    .on('match', function(point, data) {
                         // Called each time match is true
-                        console.log('match', point);
-                    })
-                    .on('unmatch', function(point) {
+                        console.log('match', point, data);
+                    }, { testdata: 'match' })
+                    .on('unmatch', function(point, data) {
                         // Called each time match is false
-                        console.log('unmatch', point);
-                    });
+                        console.log('unmatch', point, data);
+                    }, { testdata: 'unmatch' });
         </script>
     </body>
 </html>
