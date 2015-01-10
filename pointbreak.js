@@ -81,9 +81,10 @@
                 if (callback) {
                     var listenerType = this.listeners[type];
 
-                    for (var i = 0, len = listenerType.length; i < len; i++) {
-                        if (listenerType[i] === callback) {
+                    for (var i = 0; i < listenerType.length; i++) {
+                        if (listenerType[i].callback === callback) {
                             listenerType.splice(i, 1);
+                            i--;
                         }
                     }
                 } else {
